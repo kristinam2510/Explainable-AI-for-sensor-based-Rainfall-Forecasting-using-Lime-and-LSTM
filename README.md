@@ -70,7 +70,7 @@ Project Structure
 
 How to Run
 1. Clone Repository
-git clone https://github.com/your-username/rainfall-xai.git
+git clone https://github.com/kristinam2510/rainfall-xai.git
 cd rainfall-xai
 2. Install Dependencies
 pip install numpy==1.26.4 pandas scikit-learn tensorflow==2.15.0 keras==2.15.0 streamlit plotly lime joblib
