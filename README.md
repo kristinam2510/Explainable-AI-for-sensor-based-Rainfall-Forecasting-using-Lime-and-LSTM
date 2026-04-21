@@ -1,56 +1,100 @@
-# Explainable AI for Sensor-Based Rainfall Forecasting using LIME and LSTM
+Overview
 
-## Overview
+This project is an end-to-end Explainable AI system for rainfall prediction using a Bidirectional LSTM model. It not only predicts whether it will rain but also explains the prediction using LIME (Local Interpretable Model-Agnostic Explanations).
 
-This project predicts rainfall using **sensor-based weather data** and deep learning techniques. A **Long Short-Term Memory (LSTM)** model is used to analyze time-series environmental data such as temperature, humidity, pressure, and other atmospheric conditions.
+The system is deployed using Streamlit for interactive forecasting, visualization, and climate analytics.
 
-To improve model transparency, the system integrates **Explainable AI (XAI)** using **LIME (Local Interpretable Model-Agnostic Explanations)**, which explains how different features influence rainfall predictions.
+Key Features
+Rainfall prediction using deep learning
+Bidirectional LSTM model
+Explainability using LIME
+Dynamic threshold optimization to improve recall
+Interactive dashboard with Streamlit
+7-day rainfall forecast
+Climate analytics with trend and correlation visualizations
 
-## Features
+Model Architecture
+Input Layer
+→ Bidirectional LSTM (160 units)
+→ Batch Normalization + Dropout
+→ Bidirectional LSTM (80 units)
+→ Dense Layer (ReLU)
+→ Output Layer (Sigmoid)
+Loss Function: Binary Crossentropy
+Optimizer: Adam
 
-* Rainfall prediction using **LSTM neural networks**
-* Processing of **sensor-based weather data**
-* **Explainable AI using LIME**
-* Interactive visualization using **Plotly**
-* Web interface built with **Streamlit**
+Dataset
+Dataset: Australian Weather Dataset
+Target Variable: RainTomorrow
 
-## Technologies Used
+Feature Engineering
+Lag features (Rainfall, Temperature)
+Rolling averages (3-day, 7-day)
+Cyclical encoding (Month and Day using sin/cos)
+Interaction features (e.g., Humidity × Rainfall)
 
-* Python
-* TensorFlow / Keras
-* NumPy & Pandas
-* Scikit-learn
-* Plotly
-* Streamlit
-* LIME (Explainable AI)
+Evaluation Metrics
+Accuracy
+Precision
+Recall
+F1 Score
+ROC-AUC
+Confusion Matrix
+Threshold Optimization
 
-## Project Workflow
+Instead of using a fixed threshold of 0.5:
 
-1. Load and preprocess sensor-based weather dataset
-2. Train an **LSTM model** for rainfall prediction
-3. Evaluate model performance using accuracy and confusion matrix
-4. Generate **LIME explanations** to understand feature importance
-5. Display results through a **Streamlit interactive dashboard**
+The model searches thresholds from 0.15 to 0.70
+Selects the best threshold that maintains accuracy above 84% while maximizing recall
+Explainability
 
-## Installation
+LIME is used to provide local explanations for individual predictions:
 
-Install dependencies:
+Identifies features that increase rainfall probability
+Identifies features that decrease rainfall probability
+Visualizations
+ROC Curve
+Confusion Matrix Heatmap
+Rainfall Trend (Year vs Rainfall)
+Correlation Heatmap
+7-day Forecast Plot
 
-```bash
-pip install -r requirements.txt
-```
+Project Structure
+├── app.py
+├── weatherAUS.csv
+├── rain_lstm_model_v4.h5
+├── preprocessor_v4.pkl
+├── best_threshold_v4.pkl
+├── model_meta_v4.json
+├── README.md
 
-Run the application:
-
-```bash
+How to Run
+1. Clone Repository
+git clone https://github.com/your-username/rainfall-xai.git
+cd rainfall-xai
+2. Install Dependencies
+pip install numpy==1.26.4 pandas scikit-learn tensorflow==2.15.0 keras==2.15.0 streamlit plotly lime joblib
+3. Run Application
 streamlit run app.py
-```
 
-## Applications
+Concepts Used
+Time Series Forecasting
+Deep Learning (LSTM, Bidirectional LSTM)
+Feature Engineering
+Class Imbalance Handling
+Explainable AI
 
-* Weather forecasting systems
-* Smart agriculture and irrigation planning
-* Climate monitoring and environmental research
+Use Cases
+Weather forecasting
+Flood risk analysis
+Agriculture planning
+Climate trend analysis
+
+Notes
+Future predictions reuse latest available lag features
+Model performance depends on dataset quality
+Designed for balance between interpretability and performance
+
 
 ## Disclaimer
 
